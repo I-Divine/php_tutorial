@@ -1,0 +1,26 @@
+<script>
+  var isValid = function (s) {
+    let openingParenthesisStack = [];
+    let parenthesis = {
+      "}": "{",
+      ")": "(",
+      "]": "[",
+    };
+    let openingParenthesis = ["(", "{", "["];
+    for (let i = 0; i < s.length; i++) {
+      if (openingParenthesis.includes(s[i])) {
+        openingParenthesisStack.unshift(s[i]);
+        console.log("pushed");
+        console.log(openingParenthesisStack);
+      } else if (parenthesis[s[i]] == openingParenthesisStack[0]) {
+        openingParenthesisStack.shift();
+        console.log("popped");
+      } else {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  console.log(isValid("{[]}"));
+</script>
