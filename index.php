@@ -55,7 +55,7 @@ echo var_dump($num); //returns details of the variable
   # null
   
 
-  function add(int $num1, int $num2){
+  function add(int $num1, int $num2) : int{
     echo var_dump($num1);
 echo "<br/>";
 
@@ -69,3 +69,9 @@ echo "<br/>";
 // echo add(2,"3"); this would return fatal error
 //because we declared strict types at the beginning of the php code
 echo add(2,3); 
+$dir = scandir(__DIR__);
+echo "<pre>";
+print_r($dir);
+echo "</pre>";
+
+
