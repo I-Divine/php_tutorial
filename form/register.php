@@ -1,4 +1,6 @@
-<?php
+<?php  
+
+             
     $isEmailValid = $isUsernameValid = $isPasswordValid = true;
     $isSubmitted = false;
     $password = $username = $email = "";
@@ -20,7 +22,7 @@ if(isset($_POST["submit"])){
         
     if($_POST["password"]){
         $password = htmlspecialchars($_POST["password"]);
-        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
+        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$_POST["password"])){
             $isPasswordValid = false;
         }
     }else{
@@ -32,30 +34,38 @@ if(isset($_POST["submit"])){
         $username = htmlspecialchars($_POST["username"]);
         if(!preg_match("/^[a-zA-Z\s]+$/",$username)){
             $isUsernameValid = false;
-
+            
         }
     }else{
         $isUsernameValid = false;
 
     }
 
-    if($isEmailValid & $isUsernameValid & $isPasswordValid){
-        echo "successful";
-    }
+  
 }
    if($isEmailValid & $isUsernameValid & $isPasswordValid & $isSubmitted){
-        header('Location : index.php');
+        require_once "./config/connect_db.php";
+        $email = mysqli_real_escape_string($conn, $email);
+        $username = mysqli_real_escape_string($conn, $username);
+
+        $query = "INSERT INTO users(username, email, passwords) VALUES('$username','$email','$password')";
+        
+        if(mysqli_query($conn,$query)){
+           
+        }else{
+            echo "error";
+        }
+         echo "<script>window.location.replace('index.php')</script>";
     }
 
-            
-             
+  
 ?>
 
 <html>
 <?php require_once "../templates/head.php" ?>
     <section class="flex justify-center">
 
-        <form action="./index.php" method="POST" class="w-96">
+        <form action="./register.php" method="POST" class="w-96">
           
             <h2 class="text-center text-lime-500 text-xl font-bold">Sign Up</h2>
             <label for="email" class="text-neutral-800">Email</label>
