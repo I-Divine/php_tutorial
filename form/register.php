@@ -21,7 +21,7 @@ if(isset($_POST["submit"])){
     }
         
     if($_POST["password"]){
-        $password = htmlspecialchars($_POST["password"]);
+        $password = hash("sha256",$_POST["password"]);
         if(!preg_match("/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$_POST["password"])){
             $isPasswordValid = false;
         }
@@ -55,7 +55,8 @@ if(isset($_POST["submit"])){
         }else{
             echo "error";
         }
-         echo "<script>window.location.replace('index.php')</script>";
+        //  echo "<script>window.location.replace('index.php')</script>";
+        header("location : index.php");
     }
 
   

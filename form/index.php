@@ -15,7 +15,7 @@ require_once "./config/connect_db.php";
  mysqli_close($conn);
 
 ?>
-
+<html>
     <?php require_once("../templates/head.php");?>
     <section class="p-4">
         <h2 class="text-2xl text-lime-500 font-bold">Users</h2>
@@ -24,7 +24,7 @@ require_once "./config/connect_db.php";
         <div class ="my-4">
             <h3 class="text-xl text-lime-400 font-semibold"><?= htmlspecialchars($user["username"]) ?></h3>
             <h4 class="text-base text-neutral-500 font-thin"><?= htmlspecialchars($user["email"]) ?></h4>
-            
+            <a href="profile.php?id=<?= $user['ID'] ?>">View profile</a>
         </div>
         <?php endforeach ?>
         </div>
